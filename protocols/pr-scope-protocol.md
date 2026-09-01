@@ -16,6 +16,20 @@ milestone or epic branch) instead of one issue per PR.
 - Re-check scope every time a new issue lands on the branch — don't reuse a stale
   checklist from an earlier state of the PR.
 
+## Draft State
+- Open a multi-issue PR as **draft** (`gh pr create --draft`) whenever more tracked
+  issues are still expected to land on the branch before merge — by definition, a
+  rolling multi-issue PR is incomplete until the last one does, so ready-for-review is
+  the exception at creation time, not the default.
+- The only time it's safe to create one already ready-for-review is when it already
+  contains every issue the epic/milestone needs and nothing more is expected to land.
+- Flip to ready-for-review (`gh pr ready`) only once every issue in the checklist is
+  committed, its per-issue comment posted, and the branch passes CI as a unit.
+- Re-check draft state alongside scope every time a new issue lands: a PR that was
+  correctly ready-for-review can go back to draft if new issues get added to it, or
+  stay draft if issues are still pending — don't leave it out of sync with the
+  checklist.
+
 ## PR Body Template
 ```
 ## Scope
@@ -23,7 +37,8 @@ milestone or epic branch) instead of one issue per PR.
 
 - [ ] #<issue> — <title>   (one row per issue actually in this diff)
 
-<draft-until note, or omit once ready for review>
+<Draft — #<issue>, #<issue> still to land before this is ready for review.
+ Omit this line once ready.>
 
 ## References
 - <architecture doc, if relevant>

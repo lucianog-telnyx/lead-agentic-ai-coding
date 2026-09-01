@@ -5,6 +5,7 @@
   "properties": {
     "epic": { "type": ["integer", "null"] },
     "basePr": { "type": ["integer", "null"] },
+    "draft": { "type": "boolean" },
     "issues": {
       "type": "array",
       "items": {
