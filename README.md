@@ -44,6 +44,31 @@ flowchart TD
 
 ---
 
+## 🧭 Adding a New Protocol
+
+A protocol file under `protocols/` is only *consulted* until something makes it
+*mandatory*. If a new protocol must always be read under some condition — not just
+exist as reference material — that condition becomes a numbered `STEP N` entry in the
+`AGENTS.md` execution sequence. A protocol file with no execution-sequence step is
+inert: it syncs into `.agents/protocols/` but nothing ever reads it.
+
+Adding that `STEP N` line is **two edits, in the same change**, never one:
+
+1. **`AGENTS.md` in [`lead-agentic-ai-template`](https://github.com/giacchetta/lead-agentic-ai-template)** —
+   the seed every new sibling repo scaffolds its `AGENTS.md` from. Skip this and every
+   repo created after the protocol lands starts without the trigger.
+2. **Every existing sibling repo's own `AGENTS.md`**, by hand, one repo at a time.
+   This hub has no mechanism to push into an already-scaffolded, repo-local
+   `AGENTS.md` — it's explicitly local and hand-maintained (see the "AGENTS.md
+   Maintenance" protocol), never synced. Re-running `.agents/sync.sh` only updates the
+   *content* a step points at (the protocol file itself); it does not add the step.
+
+A protocol that's reference-only (consulted when relevant, never unconditionally
+required) needs neither edit — only protocols with a real "you MUST read this when X"
+trigger earn a step.
+
+---
+
 ## ⚡ Connecting Sibling Repositories
 
 ### 1. One-Time Local Machine Setup
